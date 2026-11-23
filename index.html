@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neils Alva | NAiconsult · Consultoría en IA y desarrollo</title>
+<meta name="description" content="Neils Alva, fundador de NAiconsult: gestión de datos, calidad y automatización. +20 años de trayectoria, con especialización en minería.">
+<meta name="theme-color" content="#0b1020">
+<meta property="og:title" content="Neils Alva | NAiconsult">
+<meta property="og:description" content="Gestión de datos, calidad y automatización. +20 años de trayectoria.">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --bg:#0b1020; --card:#131a33; --card2:#1a2344; --text:#eef1ff; --muted:#9aa5cf;
+    --accent:#4fd1c5; --accent2:#7c5cff; --radius:20px;
+    --overlay:rgba(8,12,28,.68);          /* oscuridad de la capa sobre la foto de fondo */
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  [hidden]{display:none!important}
+  body{
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    background:radial-gradient(900px 500px at 80% -10%,rgba(124,92,255,.25),transparent),
+               radial-gradient(700px 400px at -10% 10%,rgba(79,209,197,.18),transparent),var(--bg);
+    color:var(--text); min-height:100vh; display:flex; justify-content:center; padding:24px 16px 48px;
+    line-height:1.5;
+  }
+  main{width:100%;max-width:440px;display:flex;flex-direction:column;gap:16px}
+
+  /* PERFIL */
+  .hero{position:relative;overflow:hidden;isolation:isolate;text-align:center;padding:28px 20px;background:var(--card);
+        border-radius:var(--radius);border:1px solid rgba(255,255,255,.06);box-shadow:0 20px 50px rgba(0,0,0,.35)}
+  .hero.has-bg{background-size:cover;background-position:center}
+  .hero.has-bg::before{content:"";position:absolute;inset:0;z-index:-1;
+        background:linear-gradient(180deg,var(--overlay),rgba(8,12,28,.85))}
+  .hero.has-bg h1,.hero.has-bg .role,.hero.has-bg .tagline{text-shadow:0 1px 6px rgba(0,0,0,.8)}
+  .hero.has-bg .role{color:#d5dcf5}
+
+  .avatar{width:96px;height:96px;margin:0 auto 14px;border-radius:50%;border:0;padding:0;
+          background:linear-gradient(135deg,var(--accent),var(--accent2));
+          display:grid;place-items:center;font-weight:800;font-size:32px;color:#0b1020;
+          box-shadow:0 0 0 4px rgba(79,209,197,.2);font-family:inherit}
+  .avatar.has-photo{cursor:zoom-in;overflow:hidden;background:var(--card2)}
+  .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+  .avatar:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+  h1{font-size:26px;letter-spacing:-.5px}
+  h1 span{color:var(--accent)}
+  .role{color:var(--muted);font-size:clamp(11.5px,3.4vw,14px);margin-top:2px;white-space:nowrap}
+  .tagline{margin-top:12px;font-size:16px;font-weight:600}
+  .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+  .btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 10px;border-radius:14px;
+       text-decoration:none;font-weight:600;font-size:15px;border:0;cursor:pointer;color:var(--text);
+       background:var(--card2);transition:transform .15s,background .15s;font-family:inherit}
+  .btn:hover{transform:translateY(-2px);background:#222d57}
+  .btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#0b1020}
+  .btn.wide{grid-column:1/-1}
+  .btn .chev{transition:transform .2s;font-size:12px}
+  .btn[aria-expanded="true"] .chev{transform:rotate(180deg)}
+
+  section{background:var(--card);border-radius:var(--radius);padding:20px;border:1px solid rgba(255,255,255,.06)}
+  h2{font-size:13px;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:12px}
+  .services{display:grid;gap:12px}
+  .service{display:flex;gap:12px;align-items:flex-start}
+  .service .ico{font-size:22px;background:var(--card2);width:42px;height:42px;border-radius:12px;
+                display:grid;place-items:center;flex:none}
+  .service b{display:block;font-size:15px}
+  .service p{font-size:13.5px;color:var(--muted)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{background:var(--card2);padding:6px 12px;border-radius:999px;font-size:13px;color:var(--muted)}
+  .proof{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center}
+  .proof strong{display:block;font-size:22px;color:var(--accent)}
+  .proof small{color:var(--muted);font-size:12px}
+
+  /* SOBRE MÍ (desplegable) */
+  .about{grid-column:1/-1;background:var(--card2);border-radius:14px;padding:16px;font-size:14.5px;color:#d3def2;
+         animation:fade .2s ease}
+  .about p + p{margin-top:10px}
+  .about strong{color:var(--text)}
+  @keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+  #qr{display:flex;justify-content:center;padding:12px;background:#fff;border-radius:14px;width:fit-content;margin:0 auto}
+  .center{text-align:center;color:var(--muted);font-size:13px}
+  .qrbox{grid-column:1/-1;animation:fade .2s ease}
+  .btn.ok{background:linear-gradient(135deg,#34d399,var(--accent));color:#06231c}
+  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:4px}
+
+  /* FIRMA NAiconsult (discreta) */
+  .credit{display:inline-flex;align-items:center;justify-content:center;gap:6px;margin-top:6px;text-align:center;max-width:320px;
+          padding:12px 8px;min-height:44px;font-size:11.5px;color:var(--muted);opacity:.55;text-decoration:none;
+          transition:opacity .2s}
+  .credit:hover,.credit:focus-visible{opacity:1}
+  .credit:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+  .credit .mk{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:5px;font-size:8px;font-weight:800;
+              color:#0b1020;background:linear-gradient(135deg,var(--accent),var(--accent2))}
+  .credit u{text-decoration:none;color:var(--accent)}
+
+  /* LIGHTBOX */
+  .lb{position:fixed;inset:0;z-index:100;background:rgba(4,7,18,.94);display:flex;flex-direction:column;
+      align-items:center;justify-content:center;gap:14px;padding:56px 16px 24px;cursor:zoom-out;animation:fade .15s ease}
+  .lb img{max-width:100%;max-height:75vh;object-fit:contain;border-radius:12px;cursor:default;
+          box-shadow:0 20px 60px rgba(0,0,0,.6)}
+  .lb figcaption{color:var(--muted);font-size:14px;text-align:center;max-width:440px}
+  .lb-x{position:absolute;top:12px;right:12px;width:44px;height:44px;border:0;border-radius:50%;cursor:pointer;
+        background:rgba(255,255,255,.12);color:#fff;font-size:22px;line-height:1}
+  .lb-x:hover{background:rgba(255,255,255,.22)}
+  .lb-x:focus-visible{outline:2px solid var(--accent)}
+
+  @media (prefers-reduced-motion:reduce){.btn,.btn .chev{transition:none}.about,.lb{animation:none}}
+</style>
+</head>
+<body>
+<main>
+
+  <!-- PERFIL -->
+  <header class="hero" id="hero">
+    <button class="avatar" id="avatar" type="button" aria-label="Foto de perfil">NA</button>
+    <!-- <h1>NA<span>i</span>consult</h1> -->
+    <h1>Neils Alva</h1> 
+    <p class="role" id="name">· Consultoría en IA y Desarrollo de Aplicaciones ·</p>
+    <p class="tagline">Convertimos procesos lentos en soluciones inteligentes que ahorran tiempo y dinero.</p>
+    <div class="actions">
+      <a class="btn primary" id="wa" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+      <a class="btn" id="mail" href="#">✉️ Correo</a>
+      <button class="btn wide" id="vcard" type="button">📇 Guardar contacto</button>
+    </div>
+  </header>
+
+  <!-- SERVICIOS -->
+  <section>
+    <h2>Lo que podemos hacer por ti</h2>
+    <div class="services">
+      <div class="service"><div class="ico">🛡️</div><div><b>Calidad e integridad de datos</b><p>Validación, limpieza y control para que la información sea confiable de punta a punta.</p></div></div>
+      <div class="service"><div class="ico">🔍</div><div><b>Auditoría de bases de datos</b><p>Detección de inconsistencias, brechas y riesgos en tus fuentes de datos.</p></div></div>
+      <div class="service"><div class="ico">⚙️</div><div><b>Automatización de procesos complejos</b><p>Menos trabajo manual, menos errores y reportes listos a tiempo.</p></div></div>
+      <div class="service"><div class="ico">🧩</div><div><b>Aplicaciones a medida</b><p>Herramientas diseñadas para tu operación, con arquitectura de datos sólida.</p></div></div>
+    </div>
+  </section>
+
+  <!-- RESULTADOS (oculto: cambia mostrarResultados a true en CONFIG para activarlo) -->
+  <section id="sec-resultados" hidden>
+    <h2>Resultados</h2>
+    <div class="proof">
+      <div><strong>+XX</strong><small>proyectos</small></div>
+      <div><strong>XX%</strong><small>tiempo ahorrado</small></div>
+      <div><strong>XX</strong><small>clientes</small></div>
+    </div>
+  </section>
+
+  <!-- HERRAMIENTAS (oculto: cambia mostrarHerramientas a true en CONFIG para activarlo) -->
+  <section id="sec-herramientas" hidden>
+    <h2>Herramientas</h2>
+    <div class="chips">
+      <span class="chip">Python</span><span class="chip">R</span><span class="chip">SQL</span>
+      <span class="chip">Arquitectura de datos</span><span class="chip">Automatización</span>
+    </div>
+  </section>
+
+  <!-- CONECTA CONMIGO -->
+  <section>
+    <h2>Conecta conmigo</h2>
+    <div class="actions" style="margin-top:0">
+      <a class="btn wide" id="li" href="#" target="_blank" rel="noopener">🔗 Ver mi perfil en LinkedIn</a>
+      <button class="btn wide" id="about-btn" type="button" aria-expanded="false" aria-controls="about">
+        👤 Sobre mí <span class="chev" aria-hidden="true">▼</span>
+      </button>
+      <div class="about" id="about" hidden>
+        <p>Más de <strong>20 años</strong> liderando proyectos de gran envergadura, con especialización en <strong>minería de clase mundial en Sudamérica</strong>.</p>
+        <p>Combino criterio analítico, programación avanzada y formación en <strong>Arquitectura de Datos Empresariales</strong> para diseñar aplicaciones a medida y garantizar la calidad de la información en toda la cadena de valor.</p>
+        <p>Mi base es minera, pero mis competencias son transversales a cualquier industria que necesite optimizar flujos de información.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARTIR -->
+  <section>
+    <h2>Comparte esta tarjeta</h2>
+    <div class="actions" style="margin-top:0">
+      <button class="btn wide primary" id="share" type="button" hidden>📤 Compartir tarjeta</button>
+      <button class="btn" id="copy" type="button">🔗 Copiar link</button>
+      <a class="btn" id="share-wa" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+      <button class="btn wide" id="qr-btn" type="button" aria-expanded="false" aria-controls="qrbox">
+        ▦ Mostrar código QR <span class="chev" aria-hidden="true">▼</span>
+      </button>
+      <div class="qrbox" id="qrbox" hidden>
+        <div id="qr" aria-label="Código QR de esta tarjeta"></div>
+        <p class="center" style="margin-top:10px">Escanea para abrir la tarjeta en otro dispositivo</p>
+      </div>
+    </div>
+    <p class="center" id="share-msg" role="status" aria-live="polite" style="margin-top:10px;min-height:1.2em"></p>
+  </section>
+
+  <footer>© <span id="year"></span> NAiconsult · Lima, Perú
+    <br>
+    <a class="credit" id="credit" href="#" target="_blank" rel="noopener" hidden>
+      <!-- <span class="mk" aria-hidden="true">NA</span> -->
+      <span>· Tarjeta digital creada por NAiconsult · <br><u>¿Deseas la tuya personalizada?</u></span>
+    </a>
+  </footer>
+</main>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Foto ampliada" hidden>
+  <button class="lb-x" id="lb-x" type="button" aria-label="Cerrar">✕</button>
+  <img id="lb-img" alt="">
+  <p id="lb-cap" style="color:var(--muted);font-size:14px;text-align:center;max-width:440px"></p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script>
+  /* ====== EDITA SOLO ESTA SECCIÓN ====== */
+  const CONFIG = {
+    nombre: "Neils Alva",
+    cargo: "Consultoría en IA y Desarrollo de Aplicaciones",
+    empresa: "NAiconsult",
+    telefono: "+51998781460",            // con código de país. Vacío = botón oculto
+    email: "neilsalva.iconsult@gmail.com",   // Vacío = botón oculto
+    web: "https://TU-USUARIO.github.io/naiconsult/",   // tu URL real de GitHub Pages (usada por el QR)
+    linkedin: "https://www.linkedin.com/in/neils-alva-4114695a/",
+
+    /* PERFIL: foto del logo en lugar del avatar "NA". Vacío = se muestra el avatar con iniciales */
+    foto: "img/logo.jpg",
+    fotoDescripcion: "NAiconsult · Consultoría de IA y Datos",
+
+    /* PERFIL: foto de fondo del bloque de perfil (se le aplica una capa oscura). Vacío = sin foto */
+    fondo: "img/fondo_datos.jpg",                           // ej: "fondo.jpg"
+
+    /* SECCIONES OCULTAS (ponlas en true para volver a mostrarlas) */
+    mostrarResultados: false,
+    mostrarHerramientas: false,
+
+    mensajeWA: "Hola Neils, vi tu tarjeta de NAiconsult y quisiera conversar sobre un proyecto.",
+
+    /* COMPARTIR: texto que acompaña al enlace cuando alguien comparte la tarjeta */
+    textoCompartir: "Tarjeta digital de Neils Alva · NAiconsult",
+
+    /* FIRMA "Tarjeta digital creada por NAiconsult" (para tarjetas de CLIENTES).
+       En tu propia tarjeta déjala en false. */
+    credito: {
+      mostrar: true,                    // true = mostrar la firma discreta al final de la tarjeta
+      destino: "web",                    // "web" = lleva a tu tarjeta | "whatsapp" = abre tu WhatsApp con mensaje listo
+      url: "https://TU-USUARIO.github.io/naiconsult/",   // tu tarjeta NAiconsult
+      ref: "cliente-x",                  // identifica de qué tarjeta llegó la visita (cambia por cliente)
+      whatsapp: "+51998781460"           // tu WhatsApp (usado si destino = "whatsapp")
+    }
+  };
+  /* ===================================== */
+
+  const $ = id => document.getElementById(id);
+  const hide = id => { $(id).hidden = true; };
+  // URL que se comparte: tu web real; si aún es el marcador TU-USUARIO, usa la dirección actual de la página
+  const urlTarjeta = (CONFIG.web && !/TU-USUARIO/i.test(CONFIG.web)) ? CONFIG.web : location.href.split("#")[0];
+
+  $("name").textContent = "· " + CONFIG.cargo + " ·";
+  $("li").href = CONFIG.linkedin;
+  $("year").textContent = new Date().getFullYear();
+
+  // Firma NAiconsult (solo si está activada)
+  if (CONFIG.credito && CONFIG.credito.mostrar) {
+    const c = CONFIG.credito, a = $("credit");
+    if (c.destino === "whatsapp") {
+      a.href = "https://wa.me/" + c.whatsapp.replace(/\D/g,"") + "?text=" +
+        encodeURIComponent("Hola Neils, vi la tarjeta de " + CONFIG.empresa + " y quisiera una similar.");
+    } else {
+      a.href = c.url + (c.url.includes("?") ? "&" : "?") + "utm_source=tarjeta&ref=" + encodeURIComponent(c.ref);
+    }
+    a.hidden = false;
+  }
+
+  // Contacto directo (se oculta lo que esté vacío)
+  if (CONFIG.telefono) $("wa").href = "https://wa.me/" + CONFIG.telefono.replace(/\D/g,"") + "?text=" + encodeURIComponent(CONFIG.mensajeWA);
+  else hide("wa");
+  if (CONFIG.email) $("mail").href = "mailto:" + CONFIG.email + "?subject=" + encodeURIComponent("Consulta desde tu tarjeta digital");
+  else hide("mail");
+  if (!CONFIG.telefono && CONFIG.email) $("mail").classList.add("wide");
+  if (CONFIG.telefono && !CONFIG.email) $("wa").classList.add("wide");
+
+  // Secciones opcionales
+  $("sec-resultados").hidden = !CONFIG.mostrarResultados;
+  $("sec-herramientas").hidden = !CONFIG.mostrarHerramientas;
+
+  // Fondo del perfil con overlay oscuro
+  if (CONFIG.fondo) {
+    const h = $("hero");
+    h.style.backgroundImage = "url('" + CONFIG.fondo + "')";
+    h.classList.add("has-bg");
+  }
+
+  // Foto de perfil + lightbox
+  const lb = $("lb"), lbImg = $("lb-img");
+  function cerrarLB(){ lb.hidden = true; document.body.style.overflow = ""; $("avatar").focus(); }
+  function abrirLB(){
+    lbImg.src = CONFIG.foto;
+    lbImg.alt = CONFIG.fotoDescripcion || "Foto de perfil";
+    $("lb-cap").textContent = CONFIG.fotoDescripcion || "";
+    lb.hidden = false; document.body.style.overflow = "hidden"; $("lb-x").focus();
+  }
+  if (CONFIG.foto) {
+    const av = $("avatar");
+    av.classList.add("has-photo");
+    av.innerHTML = '<img src="' + CONFIG.foto + '" alt="' + (CONFIG.fotoDescripcion || "Foto de perfil") + '">';
+    av.setAttribute("aria-label", "Ampliar foto de perfil");
+    av.addEventListener("click", abrirLB);
+    lb.addEventListener("click", e => { if (e.target !== lbImg) cerrarLB(); });   // X o cualquier zona fuera de la foto
+    document.addEventListener("keydown", e => { if (e.key === "Escape" && !lb.hidden) cerrarLB(); });
+  } else {
+    $("avatar").style.cursor = "default";
+  }
+
+  // Sobre mí (desplegable)
+  $("about-btn").addEventListener("click", () => {
+    const abierto = $("about-btn").getAttribute("aria-expanded") === "true";
+    $("about-btn").setAttribute("aria-expanded", String(!abierto));
+    $("about").hidden = abierto;
+  });
+
+  // Guardar contacto (.vcf)
+  $("vcard").addEventListener("click", () => {
+    const partes = CONFIG.nombre.split(" ");
+    const lineas = ["BEGIN:VCARD","VERSION:3.0",
+      "N:" + partes.slice(1).join(" ") + ";" + partes[0] + ";;;",
+      "FN:" + CONFIG.nombre, "ORG:" + CONFIG.empresa, "TITLE:" + CONFIG.cargo];
+    if (CONFIG.telefono) lineas.push("TEL;TYPE=CELL:" + CONFIG.telefono);
+    if (CONFIG.email) lineas.push("EMAIL:" + CONFIG.email);
+    lineas.push("URL:" + urlTarjeta, "URL:" + CONFIG.linkedin, "END:VCARD");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([lineas.join("\r\n")], {type:"text/vcard"}));
+    a.download = "Neils-Alva-NAiconsult.vcf";
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+
+  // Compartir tarjeta
+  const msg = t => { $("share-msg").textContent = t; clearTimeout(msg.t); msg.t = setTimeout(() => $("share-msg").textContent = "", 2500); };
+  const datos = { title: CONFIG.nombre + " | " + CONFIG.empresa, text: CONFIG.textoCompartir, url: urlTarjeta };
+
+  if (navigator.share) {                                   // menú nativo del celular (WhatsApp, Telegram, correo...)
+    $("share").hidden = false;
+    $("share").addEventListener("click", async () => {
+      try { await navigator.share(datos); } catch (e) { /* el usuario canceló */ }
+    });
+  }
+
+  $("share-wa").href = "https://wa.me/?text=" + encodeURIComponent(CONFIG.textoCompartir + "\n" + urlTarjeta);
+
+  $("copy").addEventListener("click", async () => {
+    let ok = false;
+    try { await navigator.clipboard.writeText(urlTarjeta); ok = true; }
+    catch (e) {
+      const t = document.createElement("textarea");        // respaldo para navegadores sin portapapeles moderno
+      t.value = urlTarjeta; t.style.position = "fixed"; t.style.opacity = "0";
+      document.body.appendChild(t); t.select();
+      try { ok = document.execCommand("copy"); } catch (_) {}
+      t.remove();
+    }
+    const b = $("copy"), orig = "🔗 Copiar link";
+    if (ok) { b.textContent = "✓ ¡Copiado!"; b.classList.add("ok"); msg("Enlace copiado al portapapeles"); }
+    else    { msg("No se pudo copiar. Copia la dirección desde la barra del navegador."); }
+    setTimeout(() => { b.textContent = orig; b.classList.remove("ok"); }, 2000);
+  });
+
+  // QR plegable (se genera solo la primera vez que se abre)
+  let qrListo = false;
+  $("qr-btn").addEventListener("click", () => {
+    const abierto = $("qr-btn").getAttribute("aria-expanded") === "true";
+    $("qr-btn").setAttribute("aria-expanded", String(!abierto));
+    $("qrbox").hidden = abierto;
+    if (!abierto && !qrListo) {
+      if (window.QRCode) { new QRCode($("qr"), {text: urlTarjeta, width: 160, height: 160}); qrListo = true; }
+      else { $("qrbox").hidden = true; $("qr-btn").hidden = true; msg("No se pudo cargar el código QR."); }
+    }
+  });
+</script>
+</body>
+</html>
