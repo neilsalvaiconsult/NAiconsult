@@ -9,18 +9,35 @@
 <meta property="og:title" content="Neils Alva | NAiconsult">
 <meta property="og:description" content="Gestión de datos, calidad y automatización. +20 años de trayectoria.">
 <meta property="og:type" content="website">
+<script>
+  /* Aplica el tema guardado (o el del dispositivo) antes de pintar, para evitar parpadeo */
+  (function(){var t;try{t=localStorage.getItem("tema")}catch(e){}
+    if(!t)t=(window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches)?"light":"dark";
+    document.documentElement.setAttribute("data-theme",t);})();
+</script>
 <style>
   :root{
     --bg:#0b1020; --card:#131a33; --card2:#1a2344; --text:#eef1ff; --muted:#9aa5cf;
     --accent:#4fd1c5; --accent2:#7c5cff; --radius:20px;
     --overlay:rgba(8,12,28,.68);          /* oscuridad de la capa sobre la foto de fondo */
+    --overlay2:rgba(8,12,28,.85);
+    --hover:#222d57; --about:#d3def2; --btn-primary-text:#0b1020;
+    --glow1:rgba(124,92,255,.25); --glow2:rgba(79,209,197,.18);
+    --line:rgba(255,255,255,.06); --shadow:0 20px 50px rgba(0,0,0,.35);
+  }
+  /* MODO CLARO */
+  :root[data-theme="light"]{
+    --bg:#eef2fb; --card:#ffffff; --card2:#e6ecf8; --text:#14203b; --muted:#56668a;
+    --accent:#0a8077; --accent2:#5b3fe0; --hover:#d9e2f5; --about:#2a3a5e; --btn-primary-text:#ffffff;
+    --glow1:rgba(124,92,255,.14); --glow2:rgba(79,209,197,.16);
+    --line:rgba(20,32,59,.09); --shadow:0 12px 30px rgba(20,32,59,.12);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   [hidden]{display:none!important}
   body{
     font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-    background:radial-gradient(900px 500px at 80% -10%,rgba(124,92,255,.25),transparent),
-               radial-gradient(700px 400px at -10% 10%,rgba(79,209,197,.18),transparent),var(--bg);
+    background:radial-gradient(900px 500px at 80% -10%,var(--glow1),transparent),
+               radial-gradient(700px 400px at -10% 10%,var(--glow2),transparent),var(--bg);
     color:var(--text); min-height:100vh; display:flex; justify-content:center; padding:24px 16px 48px;
     line-height:1.5;
   }
@@ -28,12 +45,19 @@
 
   /* PERFIL */
   .hero{position:relative;overflow:hidden;isolation:isolate;text-align:center;padding:28px 20px;background:var(--card);
-        border-radius:var(--radius);border:1px solid rgba(255,255,255,.06);box-shadow:0 20px 50px rgba(0,0,0,.35)}
+        border-radius:var(--radius);border:1px solid var(--line);box-shadow:var(--shadow)}
   .hero.has-bg{background-size:cover;background-position:center}
   .hero.has-bg::before{content:"";position:absolute;inset:0;z-index:-1;
-        background:linear-gradient(180deg,var(--overlay),rgba(8,12,28,.85))}
+        background:linear-gradient(180deg,var(--overlay),var(--overlay2))}
+  /* foto oscura (modo oscuro, o modo claro sin foto clara): texto claro */
   .hero.has-bg h1,.hero.has-bg .role,.hero.has-bg .tagline{text-shadow:0 1px 6px rgba(0,0,0,.8)}
+  .hero.has-bg h1,.hero.has-bg .tagline{color:#fff}
   .hero.has-bg .role{color:#d5dcf5}
+  /* foto clara (modo claro con fondoClaro): capa blanca translúcida y texto oscuro */
+  .hero.has-bg.bg-light::before{background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(255,255,255,.82))}
+  .hero.has-bg.bg-light h1,.hero.has-bg.bg-light .tagline{color:var(--text)}
+  .hero.has-bg.bg-light .role{color:var(--muted)}
+  .hero.has-bg.bg-light h1,.hero.has-bg.bg-light .role,.hero.has-bg.bg-light .tagline{text-shadow:0 1px 5px rgba(255,255,255,.8)}
 
   .avatar{width:96px;height:96px;margin:0 auto 14px;border-radius:50%;border:0;padding:0;
           background:linear-gradient(135deg,var(--accent),var(--accent2));
@@ -51,14 +75,14 @@
   .btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 10px;border-radius:14px;
        text-decoration:none;font-weight:600;font-size:15px;border:0;cursor:pointer;color:var(--text);
        background:var(--card2);transition:transform .15s,background .15s;font-family:inherit}
-  .btn:hover{transform:translateY(-2px);background:#222d57}
+  .btn:hover{transform:translateY(-2px);background:var(--hover)}
   .btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-  .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#0b1020}
+  .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--btn-primary-text)}
   .btn.wide{grid-column:1/-1}
   .btn .chev{transition:transform .2s;font-size:12px}
   .btn[aria-expanded="true"] .chev{transform:rotate(180deg)}
 
-  section{background:var(--card);border-radius:var(--radius);padding:20px;border:1px solid rgba(255,255,255,.06)}
+  section{background:var(--card);border-radius:var(--radius);padding:20px;border:1px solid var(--line)}
   h2{font-size:13px;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:12px}
   .services{display:grid;gap:12px}
   .service{display:flex;gap:12px;align-items:flex-start}
@@ -73,7 +97,7 @@
   .proof small{color:var(--muted);font-size:12px}
 
   /* SOBRE MÍ (desplegable) */
-  .about{grid-column:1/-1;background:var(--card2);border-radius:14px;padding:16px;font-size:14.5px;color:#d3def2;
+  .about{grid-column:1/-1;background:var(--card2);border-radius:14px;padding:16px;font-size:14.5px;color:var(--about);
          animation:fade .2s ease}
   .about p + p{margin-top:10px}
   .about strong{color:var(--text)}
@@ -95,6 +119,13 @@
               color:#0b1020;background:linear-gradient(135deg,var(--accent),var(--accent2))}
   .credit u{text-decoration:none;color:var(--accent)}
 
+  /* BOTÓN MODO OSCURO / CLARO */
+  .theme-btn{position:fixed;top:12px;right:12px;z-index:50;width:42px;height:42px;border-radius:50%;
+             border:1px solid rgba(128,140,180,.35);background:var(--card);color:var(--text);font-size:18px;
+             line-height:1;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+  .theme-btn:hover{background:var(--card2)}
+  .theme-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
   /* LIGHTBOX */
   .lb{position:fixed;inset:0;z-index:100;background:rgba(4,7,18,.94);display:flex;flex-direction:column;
       align-items:center;justify-content:center;gap:14px;padding:56px 16px 24px;cursor:zoom-out;animation:fade .15s ease}
@@ -110,6 +141,7 @@
 </style>
 </head>
 <body>
+<button class="theme-btn" id="theme-btn" type="button" aria-label="Cambiar a modo claro">☀️</button>
 <main>
 
   <!-- PERFIL -->
@@ -223,7 +255,10 @@
     fotoDescripcion: "NAiconsult · Consultoría de IA y Datos",
 
     /* PERFIL: foto de fondo del bloque de perfil (se le aplica una capa oscura). Vacío = sin foto */
-    fondo: "img/fondo_datos.jpg",                           // ej: "fondo.jpg"
+    fondo: "img/fondo_datos_oscuro.jpg",                           // ej: "fondo.jpg"
+
+    /* PERFIL: foto de fondo para el MODO CLARO. Vacío = en modo claro se sigue usando "fondo" */
+    fondoClaro: "img/fondo_datos_claro.jpg",
 
     /* SECCIONES OCULTAS (ponlas en true para volver a mostrarlas) */
     mostrarResultados: false,
@@ -239,8 +274,8 @@
     credito: {
       mostrar: true,                    // true = mostrar la firma discreta al final de la tarjeta
       destino: "web",                    // "web" = lleva a tu tarjeta | "whatsapp" = abre tu WhatsApp con mensaje listo
-      url: "https://TU-USUARIO.github.io/naiconsult/",   // tu tarjeta NAiconsult
-      ref: "cliente-x",                  // identifica de qué tarjeta llegó la visita (cambia por cliente)
+      url: "https://neilsalvaiconsult.github.io/NAiconsult/",   // tu tarjeta NAiconsult
+      ref: "NAiconsult",                  // identifica de qué tarjeta llegó la visita (cambia por cliente)
       whatsapp: "+51998781460"           // tu WhatsApp (usado si destino = "whatsapp")
     }
   };
@@ -279,12 +314,17 @@
   $("sec-resultados").hidden = !CONFIG.mostrarResultados;
   $("sec-herramientas").hidden = !CONFIG.mostrarHerramientas;
 
-  // Fondo del perfil con overlay oscuro
-  if (CONFIG.fondo) {
+  // Fondo del perfil con overlay (cambia según el modo: oscuro -> "fondo", claro -> "fondoClaro")
+  function actualizarFondo(){
     const h = $("hero");
-    h.style.backgroundImage = "url('" + CONFIG.fondo + "')";
-    h.classList.add("has-bg");
+    const claro = document.documentElement.getAttribute("data-theme") === "light";
+    const usaClaro = claro && !!CONFIG.fondoClaro;
+    const src = usaClaro ? CONFIG.fondoClaro : CONFIG.fondo;
+    if (src) { h.style.backgroundImage = "url('" + src + "')"; h.classList.add("has-bg"); }
+    else     { h.style.backgroundImage = ""; h.classList.remove("has-bg"); }
+    h.classList.toggle("bg-light", usaClaro && !!src);
   }
+  actualizarFondo();
 
   // Foto de perfil + lightbox
   const lb = $("lb"), lbImg = $("lb-img");
@@ -313,6 +353,24 @@
     $("about-btn").setAttribute("aria-expanded", String(!abierto));
     $("about").hidden = abierto;
   });
+
+  // Modo oscuro / claro
+  (function(){
+    const root = document.documentElement, btn = $("theme-btn"), meta = document.querySelector('meta[name="theme-color"]');
+    function aplicar(t){
+      root.setAttribute("data-theme", t);
+      btn.textContent = t === "dark" ? "☀️" : "🌙";
+      btn.setAttribute("aria-label", t === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro");
+      if (meta) meta.setAttribute("content", t === "dark" ? "#0b1020" : "#eef2fb");
+      actualizarFondo();
+    }
+    aplicar(root.getAttribute("data-theme") || "dark");
+    btn.addEventListener("click", () => {
+      const nuevo = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      aplicar(nuevo);
+      try { localStorage.setItem("tema", nuevo); } catch (e) {}
+    });
+  })();
 
   // Guardar contacto (.vcf)
   $("vcard").addEventListener("click", () => {
