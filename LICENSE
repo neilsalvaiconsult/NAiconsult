@@ -1,0 +1,46 @@
+Copyright (c) 2026 Neils Alva (NAiconsult). Todos los derechos reservados.
+Copyright (c) 2026 Neils Alva (NAiconsult). All Rights Reserved.
+
+AVISO DE DERECHOS / RIGHTS NOTICE
+---------------------------------
+
+1. TITULARIDAD
+   El diseño, el texto, el código fuente, las imágenes (carpeta "img/"), el logo
+   y demás contenidos de este proyecto son propiedad de Neils Alva (NAiconsult),
+   salvo lo indicado en el punto 5.
+
+2. USO PERMITIDO
+   Se permite ver el sitio publicado. En virtud de las Condiciones de Servicio de
+   GitHub, también se permite ver y bifurcar (fork) este repositorio dentro de
+   GitHub, únicamente para su visualización.
+
+3. USO NO PERMITIDO SIN AUTORIZACIÓN ESCRITA
+   Sin permiso previo y por escrito del titular, queda prohibido copiar,
+   reproducir, modificar, adaptar, distribuir, publicar, sublicenciar, vender o
+   utilizar este proyecto, total o parcialmente, para fines propios o
+   comerciales, incluido su uso como plantilla para terceros.
+
+4. MARCA E IMAGEN
+   El nombre "NAiconsult", su logo y su imagen visual son signos distintivos del
+   titular. No se concede licencia alguna sobre ellos.
+
+5. COMPONENTES DE TERCEROS
+   Este proyecto carga la librería "qrcodejs" desde un CDN externo. Dicha
+   librería pertenece a sus autores y se rige por su propia licencia (MIT). Esta
+   licencia no la modifica ni la sustituye.
+
+6. SIN GARANTÍA
+   El proyecto se ofrece "tal cual", sin garantía de ningún tipo, expresa o
+   implícita. El titular no será responsable por daños derivados de su uso.
+
+7. CONTACTO PARA AUTORIZACIONES
+   neilsalva.iconsult@gmail.com
+
+---------------------------------
+
+EN (summary): All rights reserved. You may view the published site and, under
+GitHub's Terms of Service, view and fork this repository within GitHub for
+viewing purposes only. Any other use, copying, modification or distribution
+requires prior written permission from the owner. The "NAiconsult" name and
+logo are not licensed. Third-party components keep their own licenses. Provided
+"as is", without warranty.
