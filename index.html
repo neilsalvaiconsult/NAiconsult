@@ -222,7 +222,8 @@
     <p class="center" id="share-msg" role="status" aria-live="polite" style="margin-top:10px;min-height:1.2em"></p>
   </section>
 
-  <footer>© <span id="year"></span> NAiconsult · Lima, Perú
+  <footer>© <span id="year"></span> <span id="pie-titular">NAiconsult · Lima, Perú</span>
+    <br><span id="pie-aviso">Todos los derechos reservados.</span>
     <br>
     <a class="credit" id="credit" href="#" target="_blank" rel="noopener" hidden>
       <!-- <span class="mk" aria-hidden="true">NA</span> -->
@@ -238,7 +239,6 @@
   <p id="lb-cap" style="color:var(--muted);font-size:14px;text-align:center;max-width:440px"></p>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
 <script>
   /* ====== EDITA SOLO ESTA SECCIÓN ====== */
   const CONFIG = {
@@ -266,6 +266,20 @@
 
     mensajeWA: "Hola Neils, vi tu tarjeta de NAiconsult y quisiera conversar sobre un proyecto.",
 
+    /* PIE DE PÁGINA: aviso de derechos de autor (cambia por cliente) */
+    pie: {
+      titular: "NAiconsult · Neils Alva",
+      lugar: "Lima, Perú",
+      aviso: "Todos los derechos reservados."      // vacío = no muestra la línea
+    },
+
+    /* CÓDIGO QR: librería externa con control de integridad (SRI).
+       Pega en "integrity" el hash oficial de cdnjs. Vacío = carga sin verificar. */
+    qr: {
+      script: "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js",
+      integrity: ""                               // ej: "sha512-XXXX...=="
+    },
+
     /* COMPARTIR: texto que acompaña al enlace cuando alguien comparte la tarjeta */
     textoCompartir: "Tarjeta digital de Neils Alva · NAiconsult",
 
@@ -289,6 +303,8 @@
   $("name").textContent = "· " + CONFIG.cargo + " ·";
   $("li").href = CONFIG.linkedin;
   $("year").textContent = new Date().getFullYear();
+  $("pie-titular").textContent = [CONFIG.pie.titular, CONFIG.pie.lugar].filter(Boolean).join(" · ");
+  if (CONFIG.pie.aviso) $("pie-aviso").textContent = CONFIG.pie.aviso; else $("pie-aviso").hidden = true;
 
   // Firma NAiconsult (solo si está activada)
   if (CONFIG.credito && CONFIG.credito.mostrar) {
@@ -417,15 +433,35 @@
     setTimeout(() => { b.textContent = orig; b.classList.remove("ok"); }, 2000);
   });
 
+  // Carga la librería del QR solo cuando hace falta, con control de integridad (SRI) si hay hash
+  function cargarQR(){
+    return new Promise((ok, fallo) => {
+      if (window.QRCode) return ok();
+      const sc = document.createElement("script");
+      sc.src = CONFIG.qr.script;
+      sc.crossOrigin = "anonymous";
+      sc.referrerPolicy = "no-referrer";
+      if (CONFIG.qr.integrity) sc.integrity = CONFIG.qr.integrity;   // el navegador bloquea el archivo si no coincide
+      sc.onload = ok; sc.onerror = fallo;
+      document.head.appendChild(sc);
+    });
+  }
+
   // QR plegable (se genera solo la primera vez que se abre)
   let qrListo = false;
-  $("qr-btn").addEventListener("click", () => {
+  $("qr-btn").addEventListener("click", async () => {
     const abierto = $("qr-btn").getAttribute("aria-expanded") === "true";
     $("qr-btn").setAttribute("aria-expanded", String(!abierto));
     $("qrbox").hidden = abierto;
     if (!abierto && !qrListo) {
-      if (window.QRCode) { new QRCode($("qr"), {text: urlTarjeta, width: 160, height: 160}); qrListo = true; }
-      else { $("qrbox").hidden = true; $("qr-btn").hidden = true; msg("No se pudo cargar el código QR."); }
+      try {
+        await cargarQR();
+        new QRCode($("qr"), {text: urlTarjeta, width: 160, height: 160});
+        qrListo = true;
+      } catch (e) {
+        $("qrbox").hidden = true; $("qr-btn").hidden = true;
+        msg("No se pudo cargar el código QR de forma segura.");
+      }
     }
   });
 </script>
